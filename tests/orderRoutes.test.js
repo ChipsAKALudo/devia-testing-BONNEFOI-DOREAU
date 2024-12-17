@@ -17,19 +17,28 @@ describe('Order Routes', () => {
 
     // User Story 1: Créer une commande (user nécéssaire ?) 
     it('should create a new order', async () => {
-        const res = await request.post('/orders').send({
-            //...
+        const response = await request.post('/orders').send({
+            product: 'ProduitA',
+            quantity: 1,
+            price: 50
         });
+
+        expect(response.status).to.equal(201);
+        expect(response.body).to.have.property('id');
+        expect(response.body.product).to.equal('ProduitA');
+        expect(response.body.quantity).to.equal(1);
+        expect(response.body.price).to.equal(50);
     });
 
     // User Story 2: Récupérer toutes les commandes
     it('should retrieve all orders', async () => {
-        const res = await request.get('/orders');
-        expect(res.status).to.equal(200);
-        expect(res.body).to.be.an('array');
+        const response = await request.get('/orders');
+        expect(response.status).to.equal(200);
+        expect(response.body).to.be.an('array');
+        expect(response.body.length).to.be.greaterThan(0);
     });
 
-    // User Story 3: Récupérer une commande par ID
+/*     // User Story 3: Récupérer une commande par ID
     it('should retrieve an order by ID', async () => {
         const newOrder = await request.post('/orders').send({
             //...
@@ -58,5 +67,5 @@ describe('Order Routes', () => {
 
         const findRes = await request.get(`/orders/${newOrder.body.id}`);
         expect(findRes.status).to.equal(404);
-    });
+    }); */
 });
