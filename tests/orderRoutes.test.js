@@ -30,12 +30,30 @@ describe('Order Routes', () => {
         expect(response.body.price).to.equal(50);
     });
 
+    //avec des champs manquants
+    it('should return an error if fields are missing', async () => {
+        const response = await request.post('/orders').send({
+            product: 'ProduitB',
+            quantity: 2
+        });
+
+        expect(response.status).to.equal(400);
+        expect(response.body).to.have.property('error', 'All fields are required');
+    });
+
     // User Story 2: Récupérer toutes les commandes
     it('should retrieve all orders', async () => {
         const response = await request.get('/orders');
         expect(response.status).to.equal(200);
         expect(response.body).to.be.an('array');
         expect(response.body.length).to.be.greaterThan(0);
+
+        const order = response.body[0];
+        expect(order).to.have.property('id');
+        expect(order).to.have.property('product');
+        expect(order).to.have.property('quantity');
+        expect(order).to.have.property('price');
+
     });
 
 /*     // User Story 3: Récupérer une commande par ID
