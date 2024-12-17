@@ -56,28 +56,62 @@ describe('Order Routes', () => {
 
     });
 
-/*     // User Story 3: Récupérer une commande par ID
+    // User Story 3: Récupérer une commande par ID
     it('should retrieve an order by ID', async () => {
         const newOrder = await request.post('/orders').send({
-            //...
+            product: 'ProductC',
+            quantity: 1,
+            price: 80
         });
+
+        const res = await request.get(`/orders/${newOrder.body.id}`);
+        expect(res.status).to.equal(200);
+        expect(res.body).to.have.property('id', newOrder.body.id);
+        expect(res.body.product).to.equal('ProductC');
+    });
+
+    //avec un ID inexistant
+    it('should return an error if order not found', async () => {
+        const res = await request.get('/orders/999999');
+        expect(res.status).to.equal(404);
+        expect(res.body).to.have.property('error', 'Order not found');
     });
 
     // User Story 4: Mettre à jour une commande
     it('should update an order', async () => {
         const newOrder = await request.post('/orders').send({
-            //..
+            product: 'ProductD',
+            quantity: 3,
+            price: 60
         });
 
         const res = await request.put(`/orders/${newOrder.body.id}`).send({
-            //...
+            quantity: 5,
+            price: 9999.99
         });
+
+        expect(res.status).to.equal(200);
+        expect(res.body.quantity).to.equal(5);
+        expect(res.body.price).to.equal(9999.99);
     });
+
+    //avec un ID inexistant
+    it('should return an error if order not found', async () => {
+        const res = await request.put('/orders/999999').send({
+            quantity: 5,
+            price: 9999.99
+        });
+
+        expect(res.status).to.equal(404);
+
+    })
 
     // User Story 5: Supprimer une commande
     it('should delete an order', async () => {
         const newOrder = await request.post('/orders').send({
-            //...
+            product: 'ProductE',
+            quantity: 4,
+            price: 15
         });
 
         const res = await request.delete(`/orders/${newOrder.body.id}`);
@@ -85,5 +119,5 @@ describe('Order Routes', () => {
 
         const findRes = await request.get(`/orders/${newOrder.body.id}`);
         expect(findRes.status).to.equal(404);
-    }); */
+    });
 });
