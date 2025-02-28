@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.js');
+const Billing = require('./billingModel.js');
 
 const Order = sequelize.define('Order', {
     id: {

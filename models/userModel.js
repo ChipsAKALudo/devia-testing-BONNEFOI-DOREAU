@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.js');
+const Billing = require('./billingModel.js');
 
 // Define the User model
 const User = sequelize.define('User', {
@@ -19,6 +20,11 @@ const User = sequelize.define('User', {
     }
 }, {
     timestamps: true
+});
+
+User.hasMany(Billing, {
+    foreignKey: 'User',
+    as: 'billings'
 });
 
 module.exports = User;

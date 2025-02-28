@@ -58,6 +58,9 @@ describe('User Routes', () => {
 
         expect(res.status).to.equal(200);
         expect(res.body.name).to.equal('Alice Updated');
+
+        const findRes = await request.get(`/users/${user.body.id}`);
+        expect(findRes.body.name).to.equal('Alice Updated');
     });
 
     it('should delete a user', async () => {
