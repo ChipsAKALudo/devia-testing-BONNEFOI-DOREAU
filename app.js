@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 const userRoutes = require('./routes/userRoutes');
+const productRoutes = require('./routes/productRoutes'); // Import des routes produits
 const orderRoutes = require('./routes/orderRoutes');
 const billingRoutes = require('./routes/billingRoutes');
 
@@ -23,6 +24,8 @@ app.use(morgan('combined', { stream: accessLogStream }));
 
 // Routes
 app.use('/users', userRoutes);
+app.use('/products', productRoutes); // Ajout des routes produits
+app.use('/inventory', inventoryRoutes); //Ajout des routes pour les stocks
 app.use('/orders', orderRoutes);
 app.use('/billings', billingRoutes);
 
