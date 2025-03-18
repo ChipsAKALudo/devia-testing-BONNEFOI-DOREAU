@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const billingRoutes = require('./routes/billingRoutes');
 
 const app = express();
 
@@ -23,5 +24,6 @@ app.use(morgan('combined', { stream: accessLogStream }));
 // Routes
 app.use('/users', userRoutes);
 app.use('/orders', orderRoutes);
+app.use('/billings', billingRoutes);
 
 module.exports = app;
