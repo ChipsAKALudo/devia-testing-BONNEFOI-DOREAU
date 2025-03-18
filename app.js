@@ -23,5 +23,6 @@ app.use(morgan('combined', { stream: accessLogStream }));
 // Routes
 app.use('/users', userRoutes);
 app.use('/products', productRoutes); // Ajout des routes produits
+app.use('/inventory', inventoryRoutes); //Ajout des routes pour les stocks
 
 module.exports = app;
