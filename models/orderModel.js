@@ -2,29 +2,27 @@ const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db.js');
 const Billing = require('./billingModel.js');
 
-// Define the User model
-const User = sequelize.define('User', {
+const Order = sequelize.define('Order', {
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    name: {
+    product: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
+    quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    price: {
+        type: DataTypes.FLOAT,
+        allowNull: false
+        
     }
 }, {
     timestamps: true
 });
 
-User.hasMany(Billing, {
-    foreignKey: 'User',
-    as: 'billings'
-});
-
-module.exports = User;
+module.exports = Order;
